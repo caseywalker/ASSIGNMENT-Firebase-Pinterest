@@ -1,6 +1,6 @@
-import logoutButton from './buttons/logoutButton';
+import loginButton from './buttons/loginButton';
 
-const navbar = () => {
+const guestNavbar = () => {
   const domString = `<nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <span class="material-icons">face</span>
@@ -23,7 +23,7 @@ const navbar = () => {
   </div>
 </nav>`;
   document.querySelector('#navigation').innerHTML = domString;
-  logoutButton();
+  loginButton();
 };
 
-export default navbar;
+export default guestNavbar;

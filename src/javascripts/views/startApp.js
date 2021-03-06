@@ -1,13 +1,14 @@
-// import showBoards from '../components/boards';
 import showBoards from '../components/boards';
 import domBuilder from '../components/domBuilder';
 import navbar from '../components/navbar';
 import getBoards from '../data/boardData';
+import domEvents from '../events/domEvents';
 
-const startApp = () => {
+const startApp = (user) => {
   domBuilder(); // Building the DOM
   navbar();
-  getBoards().then((boards) => showBoards(boards));
+  getBoards(user.uid).then((boards) => showBoards(boards));
+  domEvents(user.uid);
 };
 
 export default startApp;
