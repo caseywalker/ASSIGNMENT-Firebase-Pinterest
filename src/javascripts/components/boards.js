@@ -6,7 +6,7 @@ const showBoards = (array) => {
     <img src='${item.image}' class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">${item.board_title}</h5>
-      <a href="#" class="btn btn-danger">Visit Board</a>
+      <a href="#" class="btn btn-danger" id="viewBoard--${item.firebaseKey}">Visit Board</a>
     </div>
   </div>`;
   });

@@ -1,11 +1,10 @@
 import domBuilder from '../components/domBuilder';
+import guestNavbar from '../components/guestNavbar';
 import homePage from '../components/home';
-import navbar from '../components/navbar';
 
 const guestApp = () => {
   domBuilder();
-  navbar();
   homePage();
+  guestNavbar();
 };
-
 export default guestApp;

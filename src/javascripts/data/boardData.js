@@ -6,9 +6,9 @@ const dbUrl = firebaseConfig.databaseURL;
 
 // GET BOARDS
 
-const getBoards = () => new Promise((resolve, reject) => {
-  axios.get(`${dbUrl}/boards.json`)
-    .then((response) => resolve(Object.values((response.data))))
+const getBoards = (userId) => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/boards.json?orderBy="uid"&equalTo="${userId}"`)
+    .then((response) => resolve(Object.values(response.data)))
     .catch((error) => reject(error));
 });
 
