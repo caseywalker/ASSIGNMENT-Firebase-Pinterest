@@ -1,6 +1,7 @@
 import showBoards from '../components/boards';
 import showPins from '../components/pins';
-import getBoards from '../data/boardData';
+import { getBoards } from '../data/boardData';
+import deleteBoardPins from '../data/pinBoardData';
 import { deletePin, getPins } from '../data/pinData';
 
 const domEvents = (userId) => {
@@ -26,6 +27,15 @@ const domEvents = (userId) => {
         const firebaseKey = e.target.id.split('^^')[1];
         const boardId = e.target.id.split('^^')[2];
         deletePin(firebaseKey, boardId).then((pins) => showPins(pins));
+      }
+    }
+
+    if (e.target.id.includes('deleteBoard')) {
+      // eslint-disable-next-line no-alert
+      if (window.confirm('Want to Delete?')) {
+        e.preventDefault();
+        const firebaseKey = e.target.id.split('--')[1];
+        deleteBoardPins(firebaseKey, userId).then((boardsArray) => showBoards(boardsArray));
       }
     }
   });
