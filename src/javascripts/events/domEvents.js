@@ -1,8 +1,10 @@
 import showBoards from '../components/boards';
+import addBoardForm from '../components/forms/addBoardForm';
+import addPinForm from '../components/forms/addPinForm';
 import showPins from '../components/pins';
-import { getBoards } from '../data/boardData';
+import { createBoard, getBoards } from '../data/boardData';
 import deleteBoardPins from '../data/pinBoardData';
-import { deletePin, getPins } from '../data/pinData';
+import { createPin, deletePin, getPins } from '../data/pinData';
 
 const domEvents = (userId) => {
   document.querySelector('body').addEventListener('click', (e) => {
@@ -20,6 +22,7 @@ const domEvents = (userId) => {
       getBoards(userId).then((boards) => showBoards(boards));
     }
 
+    // Delete a Pin
     if (e.target.id.includes('deletePin')) {
       // eslint-disable-next-line no-alert
       if (window.confirm('Want to Delete?')) {
@@ -29,7 +32,7 @@ const domEvents = (userId) => {
         deletePin(firebaseKey, boardId).then((pins) => showPins(pins));
       }
     }
-
+    // Delete a Board
     if (e.target.id.includes('deleteBoard')) {
       // eslint-disable-next-line no-alert
       if (window.confirm('Want to Delete?')) {
@@ -37,6 +40,40 @@ const domEvents = (userId) => {
         const firebaseKey = e.target.id.split('--')[1];
         deleteBoardPins(firebaseKey, userId).then((boardsArray) => showBoards(boardsArray));
       }
+    }
+    // Create pin
+    if (e.target.id.includes('createPin')) {
+      e.preventDefault();
+      addPinForm(userId);
+    }
+    // Submit new pin
+    if (e.target.id.includes('submit-pin')) {
+      console.warn('clicked it');
+      e.preventDefault();
+      const pinObj = {
+        pin_title: document.querySelector('#title').value,
+        pin_description: document.querySelector('#description').value,
+        image: document.querySelector('#image').value,
+        board_id: document.querySelector('#board').value,
+        uid: userId
+      };
+      createPin(pinObj).then((pinArray) => showPins(pinArray));
+    }
+    // Create Board
+    if (e.target.id.includes('createBoard')) {
+      e.preventDefault();
+      addBoardForm();
+    }
+
+    // Submit Board Button
+    if (e.target.id.includes('submit-board')) {
+      e.preventDefault();
+      const boardObj = {
+        board_title: document.querySelector('#board-title').value,
+        image: document.querySelector('#board-image').value,
+        uid: userId,
+      };
+      createBoard(boardObj, userId).then((boardArray) => showBoards(boardArray));
     }
   });
 };
