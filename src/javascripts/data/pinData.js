@@ -4,7 +4,7 @@ import firebaseConfig from '../helpers/apiKeys';
 // API CALLS FOR BOARDS
 const dbUrl = firebaseConfig.databaseURL;
 
-// GET BOARDS
+// GET Pins
 
 const getPins = (firebaseKey) => new Promise((resolve, reject) => {
   axios.get(`${dbUrl}/pins.json?orderBy="board_id"&equalTo="${firebaseKey}"`)
@@ -20,4 +20,16 @@ const deletePin = (firebaseKey, boardId) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-export { getPins, deletePin };
+// Create Pins
+
+const createPin = (pinObject) => new Promise((resolve, reject) => {
+  axios.post(`${dbUrl}/pins.json`, pinObject)
+    .then((response) => {
+      const body = { firebaseKey: response.data.name };
+      axios.patch(`${dbUrl}/pins/${response.data.name}.json`, body)
+        .then(() => {
+          getPins(pinObject.board_id).then((pinsArray) => resolve(pinsArray));
+        });
+    }).catch((error) => reject(error));
+});
+export { getPins, deletePin, createPin };
