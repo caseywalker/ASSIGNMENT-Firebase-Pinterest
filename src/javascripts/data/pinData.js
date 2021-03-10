@@ -12,6 +12,12 @@ const getPins = (firebaseKey) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
+const getSinglePin = (firebaseKey) => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/pins/${firebaseKey}.json`)
+    .then((response) => resolve(response.data))
+    .catch((error) => reject(error));
+});
+
 // Delete Pins
 
 const deletePin = (firebaseKey, boardId) => new Promise((resolve, reject) => {
@@ -32,4 +38,15 @@ const createPin = (pinObject) => new Promise((resolve, reject) => {
         });
     }).catch((error) => reject(error));
 });
-export { getPins, deletePin, createPin };
+
+// Update Pins
+const updatePin = (firebaseKey, pinObject) => new Promise((resolve, reject) => {
+  axios.patch(`${dbUrl}/pins/${firebaseKey}.json`, pinObject)
+    .then(() => getPins(pinObject.board_id))
+    .then((pinsArray) => resolve(pinsArray))
+    .catch((error) => reject(error));
+});
+
+export {
+  getPins, deletePin, createPin, getSinglePin, updatePin
+};
