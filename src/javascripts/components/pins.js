@@ -11,7 +11,7 @@ const showPins = (array) => {
       <h5 class="card-title">${item.pin_title}</h5>
       <p>${item.pin_description}</p>
       <a href="#" class="btn btn-danger" id="deletePin^^${item.firebaseKey}^^${item.board_id}">Delete Pin</a>
-      <a href="#" class="btn btn-danger mt-2" id="edit-pin^^${item.firebaseKey}">Change Pin Board</a>
+      <button class="btn btn-danger mt-2" data-toggle="modal" data-target="#formModal" id="edit-pin^^${item.firebaseKey}">Change Pin Board</button>
     </div>
   </div>`;
   });
