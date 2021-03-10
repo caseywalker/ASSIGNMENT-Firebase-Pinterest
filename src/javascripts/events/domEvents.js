@@ -1,10 +1,14 @@
 import showBoards from '../components/boards';
 import addBoardForm from '../components/forms/addBoardForm';
 import addPinForm from '../components/forms/addPinForm';
+import editPinForm from '../components/forms/editPinForm';
+import formModal from '../components/forms/formModal';
 import showPins from '../components/pins';
 import { createBoard, getBoards } from '../data/boardData';
 import deleteBoardPins from '../data/pinBoardData';
-import { createPin, deletePin, getPins } from '../data/pinData';
+import {
+  createPin, deletePin, getPins, getSinglePin, updatePin
+} from '../data/pinData';
 
 const domEvents = (userId) => {
   document.querySelector('body').addEventListener('click', (e) => {
@@ -74,6 +78,24 @@ const domEvents = (userId) => {
         uid: userId,
       };
       createBoard(boardObj, userId).then((boardArray) => showBoards(boardArray));
+    }
+
+    // Click event for showing modal on editing pin board
+    if (e.target.id.includes('edit-pin')) {
+      e.preventDefault();
+      const firebaseKey = e.target.id.split('^^')[1];
+      formModal('Edit Pin');
+      getSinglePin(firebaseKey).then((pinObject) => editPinForm(pinObject, userId));
+    }
+
+    if (e.target.id.includes('update-pin')) {
+      e.preventDefault();
+      const firebaseKey = e.target.id.split('^^')[1];
+      const pinObj = {
+        board_id: document.querySelector('#board').value
+      };
+      updatePin(firebaseKey, pinObj).then((pinsArray) => showPins(pinsArray));
+      $('#formModal').modal('toggle');
     }
   });
 };
