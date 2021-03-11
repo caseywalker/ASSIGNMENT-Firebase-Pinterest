@@ -4,10 +4,11 @@ import addPinForm from '../components/forms/addPinForm';
 import editPinForm from '../components/forms/editPinForm';
 import formModal from '../components/forms/formModal';
 import showPins from '../components/pins';
-import { createBoard, getBoards } from '../data/boardData';
+import pinTitleBuilder from '../components/pinTitle';
+import { createBoard, getBoards, getSingleBoard } from '../data/boardData';
 import deleteBoardPins from '../data/pinBoardData';
 import {
-  createPin, deletePin, getPins, getSinglePin, updatePin
+  createPin, deletePin, getAllPins, getPins, getSinglePin, updatePin
 } from '../data/pinData';
 
 const domEvents = (userId) => {
@@ -17,7 +18,9 @@ const domEvents = (userId) => {
       e.preventDefault();
       const firebaseKey = e.target.id.split('--')[1];
       getPins(firebaseKey).then((pins) => showPins(pins));
+      getSingleBoard(firebaseKey).then((board) => pinTitleBuilder(board));
     }
+
     // Event to return to main page from pins
     if (e.target.id.includes('returnPins')) {
       e.preventDefault();
@@ -96,6 +99,21 @@ const domEvents = (userId) => {
       };
       updatePin(firebaseKey, pinObj).then((pinsArray) => showPins(pinsArray));
       $('#formModal').modal('toggle');
+    }
+    // NAVBAR Events
+    if (e.target.id.includes('home-nav')) {
+      e.preventDefault();
+      document.querySelector('#boards').innerHTML = '';
+      document.querySelector('#stage').innerHTML = '';
+      getBoards(userId).then((boards) => showBoards(boards));
+    }
+
+    if (e.target.id.includes('all-pins')) {
+      e.preventDefault();
+      document.querySelector('#main-container').innerHTML = '<h1>All Pins</h1>';
+      document.querySelector('#boards').innerHTML = '';
+      document.querySelector('#stage').innerHTML = '';
+      getAllPins(userId).then((pins) => showPins(pins));
     }
   });
 };
