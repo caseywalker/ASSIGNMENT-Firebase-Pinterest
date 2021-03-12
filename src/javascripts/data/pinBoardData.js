@@ -1,5 +1,5 @@
 import { deleteBoard } from './boardData';
-import { deletePin, getPins } from './pinData';
+import { deletePin, getAllPins, getPins } from './pinData';
 
 const deleteBoardPins = (boardId, userId) => new Promise((resolve, reject) => {
   getPins(boardId).then((pinsArray) => {
@@ -9,4 +9,18 @@ const deleteBoardPins = (boardId, userId) => new Promise((resolve, reject) => {
   }).catch((error) => reject(error));
 });
 
-export default deleteBoardPins;
+const getSearchPins = (userId, searchValue) => new Promise((resolve, reject) => {
+  const result = [];
+  getAllPins(userId).then((pins) => {
+    pins.forEach((pin) => {
+      const searchedValue = searchValue.toUpperCase();
+      const pinTitle = pin.pin_title.toUpperCase();
+      if (pinTitle.includes(searchedValue)) {
+        result.push(pin);
+      }
+    });
+  }).then(() => resolve(Object.values(result)))
+    .catch((error) => reject(error));
+});
+
+export { deleteBoardPins, getSearchPins };

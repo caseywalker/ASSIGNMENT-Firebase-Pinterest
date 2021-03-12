@@ -6,7 +6,7 @@ import formModal from '../components/forms/formModal';
 import showPins from '../components/pins';
 import pinTitleBuilder from '../components/pinTitle';
 import { createBoard, getBoards, getSingleBoard } from '../data/boardData';
-import deleteBoardPins from '../data/pinBoardData';
+import { deleteBoardPins, getSearchPins } from '../data/pinBoardData';
 import {
   createPin, deletePin, getAllPins, getPins, getSinglePin, updatePin
 } from '../data/pinData';
@@ -37,6 +37,7 @@ const domEvents = (userId) => {
         const firebaseKey = e.target.id.split('^^')[1];
         const boardId = e.target.id.split('^^')[2];
         deletePin(firebaseKey, boardId).then((pins) => showPins(pins));
+        getSingleBoard(boardId).then((board) => pinTitleBuilder(board));
       }
     }
     // Delete a Board
@@ -65,6 +66,7 @@ const domEvents = (userId) => {
         uid: userId
       };
       createPin(pinObj).then((pinArray) => showPins(pinArray));
+      getSingleBoard(pinObj.board_id).then((board) => pinTitleBuilder(board));
     }
     // Create Board
     if (e.target.id.includes('createBoard')) {
@@ -114,6 +116,13 @@ const domEvents = (userId) => {
       document.querySelector('#boards').innerHTML = '';
       document.querySelector('#stage').innerHTML = '';
       getAllPins(userId).then((pins) => showPins(pins));
+    }
+    // Search bar
+    if (e.target.id.includes('search-btn')) {
+      const searchValue = document.querySelector('#search-bar').value;
+      getSearchPins(userId, searchValue).then((pinsArray) => showPins(pinsArray));
+      document.querySelector('#main-container').innerHTML = `<h1>Search Results for ${searchValue}</h1>`;
+      document.querySelector('#search-bar').value = '';
     }
   });
 };
