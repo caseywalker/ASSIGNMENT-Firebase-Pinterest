@@ -16,8 +16,8 @@ const navbar = () => {
           <a class="nav-link" aria-current="page" href="#" id="all-pins">All Pins</a>
         </li>
       <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-danger" type="submit">Search</button>
+        <input class="form-control me-2" type="search" placeholder="Search Pins" aria-label="Search" id="search-bar">
+        <button class="btn btn-outline-danger" type="submit" id="search-btn">Search</button>
       </form> 
       <li class="nav-item" id="sign-in-btn">
       </li>
