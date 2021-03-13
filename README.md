@@ -1,55 +1,31 @@
-# Pinterest
+# Pin Boards 
 
-Your team has been tasked with creating pinterest.  If you live under a rock and have never used pinterest before go figure out what it does. TLDR; users create boards and can pin urls to the boards
+### Overview 
+Pin Boards is my version of a Pinterest application. Users can log in, and create Boards to organize sets of Pins based on categories of their desire. Users may create new boards and pins, delete or update pins and boards to customize as they choose, and even search through all pins to find exactly what they are looking for!
 
-## Requirements
-* Clean code - single responsibility principle
-* ES6 Modules bundled with webpack
-* No errors - linters should be clean
-* SASS and Bootstrap for styling
-* Completely planned out - before each section you should be making new cards before you code.  You should have wireframes and an ERD
+### Deployed Project
+  * https://cw-pinboards.netlify.app/
+### Project Board
+  * https://github.com/caseywalker/ASSIGNMENT-Firebase-Pinterest/projects/1
 
-## HW Parts
+### User Description 
+A Pin Boards user would want to organize different sets of Pins or individual items by interests or categories. A user may want to have a board for future home projects, or fashion ideas to try out in the future! The beautiful thing is that the user may make this application into whatever they want it to be with the ability to Create, Read, Update, and Delete to customize their individual view. 
 
-### Part 1: ERDs and Authentication
-* Create an ERD for pinterest (do this in studygroup)
-* Clone this repo
-* Create a setup branch
-* Do all the stuff needed when setting up the project. Reference the webpack instructions if needed. These include making the updates to the `.env` file
-  * Create a new firebase project, database, and enable google authentication, etc.
-* Create an authentication branch and add a navbar with logout button, and place the google login button somewhere for you to test
-  * **Note: There are components that you can use to get started and style later. We just want you to get your auth setup by yourself.**
-* When your user is **logged out** they should see the navbar with only a brand.  And an h1 on the page that says PINTEREST (make a `home` component for this)
-* When your user is logged in they should see a navbar with a brand and a logout button and an H1 on the page that says Boards (make a `boards` component for this)
-
-### Part 2: READ
-#### Setup
-* Create some json data
-* Import that data into firebase
-
-#### User Stories
-* As a user, when I am logged in and the page loads, I should see all the boards that belong to me.
-
-* As a user, when I click on one of my boards, I should see a single board view that shows all pins for that board.
-
-* As a user, when I am on the single board view, there should be some way to go back to all my boards.
-
-### Part 3: DELETE
-* As a user, I should be able to delete a pin from one of my boards.
-
-* As a user, I should be able to delete one of my boards.
-
-* As a user, when I delete one of my boards all pins that were on that board should be deleted as well.
-
-### Part 4: CREATE
-* As a user, I should be able to create a new pin.
-
-* As a user, I should be able to create a new board.
-
-### Part 5: UPDATE
-* As a user, I should be able to change which board a pin belongs to.
-
-### Part 6: Deploy and Readme
-* As a user I should be able to use your app on the internet - it should be deployed using Netlify.
-
-* As a developer, I want to see an amazing README for this project.
+### Features
+- [ ] Boards to organize pins within
+- [ ] Individual Pins with images, title, and descriptions
+- [ ] Update pins to different boards as needed 
+- [ ] Create new Pins and Images
+- [ ] View all boards, pins by board, and all pins
+- [ ] Delete pins or boards as needed 
+- [ ] Search bar to search through all pins 
+### Screenshots 
+![Main App](https://github.com/caseywalker/images/blob/main/PB_Initial.PNG)
+![View Pins](https://github.com/caseywalker/images/blob/main/Boards.PNG)
+![Create a Pin](https://github.com/caseywalker/images/blob/main/Create.PNG)
+![Delete a Pin](https://github.com/caseywalker/images/blob/main/Delete.PNG)
+![Search Bar](https://github.com/caseywalker/images/blob/main/PB_SearchResult.PNG)
+### Contributors 
+[Casey Walker](https://github.com/caseywalker)
+### Loom Video 
+  * https://www.loom.com/share/53492d6afd744cde8feeb8bf00075345
