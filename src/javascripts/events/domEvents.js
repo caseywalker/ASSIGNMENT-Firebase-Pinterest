@@ -119,6 +119,7 @@ const domEvents = (userId) => {
     }
     // Search bar
     if (e.target.id.includes('search-btn')) {
+      e.preventDefault();
       const searchValue = document.querySelector('#search-bar').value;
       getSearchPins(userId, searchValue).then((pinsArray) => showPins(pinsArray));
       document.querySelector('#main-container').innerHTML = `<h1>Search Results for ${searchValue}</h1>`;
